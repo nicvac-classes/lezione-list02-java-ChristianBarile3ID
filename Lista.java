@@ -30,7 +30,7 @@ public class Lista<T> {
         }
 
         Nodo<T> curr = head;
-        while (curr.next != null) {
+        while (curr != null) {
             curr = curr.next;
         }
         curr.next = nuovoNodo;
@@ -42,7 +42,7 @@ public class Lista<T> {
         } else {
             Nodo<T> curr = head;
             currI = 0;
-            while (currI<posizione-1 && curr.next!=null) {
+            while (currI<posizione-1 && curr!=null) {
                 curr = curr.next;
                 ++currI;
             }
@@ -70,7 +70,7 @@ public class Lista<T> {
             throw new NoSuchElementException("Lista vuota");
         }
         Nodo<T> current = head;
-        while (current.next!=null) {
+        while (current!=null) {
             current = current.next;
         }
         return current.dato;
@@ -85,11 +85,59 @@ public class Lista<T> {
         } 
         Nodo <T> curr = head;
         int currI = 0;
-        while (currI<posizione-1 && curr.next!=null) {
+        while (currI<posizione-1 && curr!=null) {
             curr = curr.next;
             currI++;
         }
-        return curr.dato;
+        if (curr!=null) {
+            return curr.dato;   
+        }
+    }
+
+    public int size() {
+        Nodo <T> curr = head;
+        int cont = 0;
+        while (curr!=null) {
+            curr = curr.next;
+            ++cont;
+        }
+        return cont;
+    }
+
+    public boolean contains(T elem) {
+        Nodo<T> curr = head;
+        while (curr!=null) {
+            T dato = curr.dato;
+            if (dato instanceof String && elem instanceof String) {
+                if (((String) dato).equalsIgnoreCase((String)elem)) {
+                    return true;
+                }
+            }
+            if (dato.equals(elem)) {
+                return true;
+            }
+            curr = curr.next;
+        }
+        return false;
+    }
+
+    public int indexOf(T elem) {
+        Nodo<T> curr = head;
+        int idx = 0;
+        while (curr!=null) {
+            T dato = curr.dato;
+            if (dato instanceof String && elem instanceof String) {
+                if (((String) dato).equalsIgnoreCase((String)elem)) {
+                    return idx;
+                }
+            }
+            if (dato.equals(elem)) {
+                return idx;
+            }
+            curr = curr.next;
+            ++idx;
+        }
+        return -1;
     }
 
 }
