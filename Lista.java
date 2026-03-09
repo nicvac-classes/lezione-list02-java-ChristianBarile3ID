@@ -165,4 +165,29 @@ public class Lista<T> {
         return false;
     }
 
+    public T cancellaInPosizione(int pos) {
+        if (head==null || pos<0) {
+            throw new IndexOutOfBoundsException("Lista vuota o posizione negativa.");
+        }
+        if (pos==0) {
+            T dato = head.dato;
+            head = head.next;
+            return dato;
+        }
+        Nodo <T> prec = head;
+        Nodo <T> curr = head.next;
+        int cont = 1;
+        while (curr!=null) {
+            if (cont==pos) {
+                T dato = curr.dato;
+                prec.next = curr.next;
+                return dato;
+            }
+            prec = curr;
+            curr = curr.next;
+            ++cont;
+        }
+        throw new IndexOutOfBoundsException("Posizione troppo grande");
+    }
+
 }
