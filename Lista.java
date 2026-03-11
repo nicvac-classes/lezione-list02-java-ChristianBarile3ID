@@ -190,4 +190,27 @@ public class Lista<T> {
         throw new IndexOutOfBoundsException("Posizione troppo grande");
     }
 
+    public void concatena(Lista<T> lista) {
+        if (head!=null) {
+            head = Lista.head;
+            return;
+        }
+        Nodo<T> curr = head;
+        while (curr.next!=head) {
+            curr = curr.next;
+        }
+        curr.next = lista.head;
+    }
+
+    public String toString() {
+        Nodo<T> curr = head;
+        String s = "";
+        while (curr!=null) {
+            s += curr.dato + "-->";
+            curr = curr.next;
+        }
+        s += "null";
+        return s;
+    }
+
 }
